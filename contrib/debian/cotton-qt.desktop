@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Cotton
+Comment=Cotton P2P Cryptocurrency
+Comment[fr]=Cotton, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Cotton, eşten eşe kriptografik sanal para birimi
+Exec=cotton-qt %u
+Terminal=false
+Type=Application
+Icon=cotton128
+MimeType=x-scheme-handler/cotton;
+Categories=Office;Finance;
