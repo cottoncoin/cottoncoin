@@ -58,61 +58,7 @@ struct CBlockTemplate;
 struct CNodeStateStats;
 
 inline int64_t GetMstrNodCollateral(int nHeight){
-
-
-      if(nHeight < 100000)
-      {
-        return 1000;
-      }
-      else if(nHeight >= 100000 && nHeight < 125000)
-      {
-        return 10000;
-      }
-      else if(nHeight >= 125000 && nHeight < 150000)
-      {
-        return 15000;
-      }
-      else if(nHeight >= 150000 && nHeight < 200000)
-      {
-        return 20000;
-      }
-      else if(nHeight >= 200000 && nHeight < 300000)
-      {
-        return 25000;
-      }
-      else if(nHeight >= 300000 && nHeight < 400000)
-      {
-        return 60000;
-      }
-      else if(nHeight >= 400000 && nHeight < 500000)
-      {
-        return 100000;
-      }
-      else if(nHeight >= 500000 && nHeight < 600000) // fork will happen at 35k
-      {
-        return 150000;
-      }
-      else if(nHeight >= 600000 && nHeight < 700000)
-      {
-        return 200000;
-      }
-      else if(nHeight >= 700000 && nHeight < 800000)
-      {
-        return 250000;
-      }
-      else if(nHeight >= 800000 && nHeight < 900000)
-      {
-        return 275000;
-      }
-      else if(nHeight >= 900000)
-      {
-        return 300000;
-      }
-      else
-      {
-        return 1000;
-      }
-
+      return 1000;
 }
 
 /** Default for -blockmaxsize and -blockminsize, which control the range of sizes the mining code will create **/
