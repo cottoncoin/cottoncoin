@@ -2,9 +2,12 @@
 
 cd ~
 echo "****************************************************************************"
-echo "* Ubuntu 16.04 is the recommended opearting system for this install.       *"
+echo "* Ubuntu 16.04 is the recommended operating system for this install.       *"
 echo "*                                                                          *"
 echo "* This script will install and configure your Cotton Coin  masternodes.    *"
+echo "*                                                                          *"
+echo "*        IPv6 will be used if available                                    *"
+echo "*                                                                          *"
 echo "****************************************************************************"
 echo && echo && echo
 echo "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!"
@@ -17,7 +20,7 @@ echo && echo && echo
 echo "Do you want to install all needed dependencies (no if you did it before)? [y/n]"
 read DOSETUP
 
-if [ $DOSETUP = "y" ]  
+if [ $DOSETUP = "y" ]
 then
   sudo apt-get update
   sudo apt-get -y upgrade
@@ -54,31 +57,28 @@ then
 fi
 
  ## Setup conf
- IP=$(curl -s4 api.ipify.org)
+ IP=$(curl https://ident.me)
  mkdir -p ~/bin
  echo ""
  echo "Configure your masternodes now!"
  echo "Detecting IP address:$IP"
 
-echo ""
-echo "How many nodes do you want to create on this server? [min:1 Max:20]  followed by [ENTER]:"
-read MNCOUNT
-
-
-for i in `seq 1 1 $MNCOUNT`; do
   echo ""
   echo "Enter alias for new node"
-  read ALIAS  
+  read ALIAS
 
   echo ""
   echo "Enter port for node $ALIAS"
-  read PORT
-
+  echo "Just press enter"
+  DEFAULTPORT=22123
+  read -p "Cotton Port: " -i $DEFAULTPORT -e PORT
+  : ${PORT:=$DEFAULTCROPCOINPORT}
+  
   echo ""
   echo "Enter masternode private key for node $ALIAS"
   read PRIVKEY
 
-  RPCPORT=$(($PORT*10))
+  RPCPORT=$(echo "${PORT: -4}")
   echo "The RPC port is $RPCPORT"
 
   ALIAS=${ALIAS}
@@ -86,11 +86,11 @@ for i in `seq 1 1 $MNCOUNT`; do
 
   # Create scripts
   echo '#!/bin/bash' > ~/bin/cottond_$ALIAS.sh
-  echo "cottoncoind -daemon -conf=$CONF_DIR/cotton.conf -datadir=$CONF_DIR "'$*' >> ~/bin/cottond_$ALIAS.sh
+  echo "cottond -daemon -conf=$CONF_DIR/cotton.conf -datadir=$CONF_DIR "'$*' >> ~/bin/cottond_$ALIAS.sh
   echo '#!/bin/bash' > ~/bin/cotton-cli_$ALIAS.sh
-  echo "cottoncoin-cli -conf=$CONF_DIR/cotton.conf -datadir=$CONF_DIR "'$*' >> ~/bin/cotton-cli_$ALIAS.sh
+  echo "cotton-cli -conf=$CONF_DIR/cotton.conf -datadir=$CONF_DIR "'$*' >> ~/bin/cotton-cli_$ALIAS.sh
   echo '#!/bin/bash' > ~/bin/cotton-tx_$ALIAS.sh
-  echo "cottoncoin-tx -conf=$CONF_DIR/cotton.conf -datadir=$CONF_DIR "'$*' >> ~/bin/cotton-tx_$ALIAS.sh 
+  echo "cotton-tx -conf=$CONF_DIR/cotton.conf -datadir=$CONF_DIR "'$*' >> ~/bin/cotton-tx_$ALIAS.sh
   chmod 755 ~/bin/cotton*.sh
 
   mkdir -p $CONF_DIR
@@ -104,15 +104,21 @@ for i in `seq 1 1 $MNCOUNT`; do
   echo "logtimestamps=1" >> cotton.conf_TEMP
   echo "maxconnections=256" >> cotton.conf_TEMP
   echo "masternode=1" >> cotton.conf_TEMP
-  echo "" >> cotton.conf_TEMP
-
-  echo "" >> cotton.conf_TEMP
   echo "port=$PORT" >> cotton.conf_TEMP
-  echo "masternodeaddr=$IP:$PORT" >> cotton.conf_TEMP
+  echo "masternodeaddr="[$IP]":$PORT" >> cotton.conf_TEMP
   echo "masternodeprivkey=$PRIVKEY" >> cotton.conf_TEMP
   sudo ufw allow $PORT/tcp
 
   mv cotton.conf_TEMP $CONF_DIR/cotton.conf
-  
+
   sh ~/bin/cottond_$ALIAS.sh
-done
+  
+  
+ echo
+ echo -e "================================================================================================================================"
+ echo -e "Cotton coin Masternode is up and running and it is listening on port $PORT."
+ echo -e "Please make sure the you use the [] when using IPv6 in the masternode config of local wallet" [$IP]:$PORT
+ echo -e "MASTERNODE PRIVATEKEY is: $PRIVKEY"
+ echo -e "================================================================================================================================"  
+    
+
