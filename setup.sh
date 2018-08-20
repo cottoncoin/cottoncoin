@@ -57,7 +57,7 @@ then
 fi
 
  ## Setup conf
- IP=$(curl https://ident.me)
+ IP=$(curl -k https://ident.me)
  mkdir -p ~/bin
  echo ""
  echo "Configure your masternodes now!"
