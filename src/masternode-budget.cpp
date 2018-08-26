@@ -593,7 +593,7 @@ CBudgetProposal* CBudgetManager::FindProposal(uint256 nHash)
 bool CBudgetManager::IsBudgetPaymentBlock(int nBlockHeight)
 {
     int nHighestCount = -1;
-    int nFivePercent = mnodeman.CountEnabled(ActiveProtocol()) / 20;
+    int nFivePercent = mnodeman.CountEnabled(ActiveProtocol()) / 10;
 
     std::map<uint256, CFinalizedBudget>::iterator it = mapFinalizedBudgets.begin();
     while (it != mapFinalizedBudgets.end()) {
