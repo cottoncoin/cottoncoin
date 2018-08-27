@@ -38,7 +38,7 @@ then
   sudo echo "/var/swap.img none swap sw 0 0" >> /etc/fstab
   cd
 
-  wget https://cottonco.in/wallet/Linux.zip
+  wget https://github.com/cottoncoin/cottoncoin/releases/download/v1.4.0.0/Linux.zip
   unzip Linux.zip
   chmod +x Linux/bin/*
   sudo mv  Linux/bin/* /usr/local/bin
