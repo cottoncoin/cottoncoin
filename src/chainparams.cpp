@@ -56,11 +56,13 @@ static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
     (1, uint256("0x0000050e5938c5192f4b01a65b99d5deac859f59079cfe374395c84b9ee3cc96"))
     (25001, uint256("0xa6c09ef5462ad4df72c613c937925e3dc6a825554099d2f262278e956fb8a4d9"))
-    (50501, uint256("0x26181d012b7f2491b186196f2ead49dd710535e8df0a9b7b4fee294f5f33362c"));
+    (50501, uint256("0x26181d012b7f2491b186196f2ead49dd710535e8df0a9b7b4fee294f5f33362c"))
+    (550501, uint256("0x92af9207dbff2d273287d139965c3aa890b246a687c78e81cb02b7f40080085c"))
+    (762072, uint256("0x89c13be3afee4b0ac7d337729b93178a55e3ad36ed90e3fda25ec9d85cf80ec0"));
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
-    1535286409, // * UNIX timestamp of last checkpoint block
-    102445,    // * total number of transactions between genesis and last checkpoint
+    1578476509, // * UNIX timestamp of last checkpoint block
+    1565050,    // * total number of transactions between genesis and last checkpoint
                 //   (the tx=... number in the SetBestChain debug.log lines)
     2000        // * estimated number of transactions per day after checkpoint
 };
@@ -162,11 +164,9 @@ public:
         assert(hashGenesisBlock == uint256("0x000001ed2eb1c365e30e5dea708fd7f957caf6bd2d4f2e690a6aa09257de6f15"));
         assert(genesis.hashMerkleRoot == uint256("0xf4dfd7c916fc4e813ab1bf2b5778eab90a260e415c69d8838772f7b56c3f6317"));
 
-    	vSeeds.push_back(CDNSSeedData("165.227.201.182", "165.227.201.182"));
-        vSeeds.push_back(CDNSSeedData("162.243.164.207", "162.243.164.207"));
-        vSeeds.push_back(CDNSSeedData("165.227.197.82", "165.227.197.82"));
-        vSeeds.push_back(CDNSSeedData("159.65.236.125", "159.65.236.125"));
-        vSeeds.push_back(CDNSSeedData("159.89.234.112", "159.89.234.112"));
+
+        vSeeds.push_back(CDNSSeedData("74.222.6.94", "74.222.6.94"));
+        vSeeds.push_back(CDNSSeedData("74.222.6.81", "74.222.6.81"));
 
         base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 28); // G
         base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 138); // x
