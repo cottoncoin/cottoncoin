@@ -1,13 +1,11 @@
-package=protobuf3
-$(package)_version=3.6.1
-$(package)_download_path=https://github.com/protocolbuffers/protobuf/releases/download/v$($(package)_version)/
-$(package)_file_name=protobuf-cpp-$($(package)_version).tar.gz
-$(package)_sha256_hash=b3732e471a9bb7950f090fd0457ebd2536a9ba0891b7f3785919c654fe2a2529
-$(package)_cxxflags=-std=c++11
+package=native_protobuf
+$(package)_version=2.6.1
+$(package)_download_path=https://github.com/google/protobuf/releases/download/v$($(package)_version)
+$(package)_file_name=protobuf-$($(package)_version).tar.bz2
+$(package)_sha256_hash=ee445612d544d885ae240ffbcbf9267faa9f593b7b101f21d58beceb92661910
 
 define $(package)_set_vars
-  $(package)_config_opts=--disable-shared --prefix=$(build_prefix)
-  $(package)_config_opts_linux=--with-pic
+$(package)_config_opts=--disable-shared --without-zlib
 endef
 
 define $(package)_config_cmds
@@ -15,14 +13,13 @@ define $(package)_config_cmds
 endef
 
 define $(package)_build_cmds
-  $(MAKE) -C src libprotobuf.la all
+  $(MAKE) -C src protoc
 endef
 
 define $(package)_stage_cmds
-  $(MAKE) DESTDIR=$($(package)_staging_dir) -C src install install-libLTLIBRARIES install-nobase_includeHEADERS &&\
-  $(MAKE) DESTDIR=$($(package)_staging_dir) install-pkgconfigDATA
+  $(MAKE) -C src DESTDIR=$($(package)_staging_dir) install-strip
 endef
 
 define $(package)_postprocess_cmds
-  rm lib/libprotoc.a
+  rm -rf lib include
 endef
