@@ -20,29 +20,13 @@ created. To use it for Bitcoin:
 
 Common `host-platform-triplets` for cross compilation are:
 
-- `i686-w64-mingw32` for Win32
-- `x86_64-w64-mingw32` for Win64
-- `x86_64-apple-darwin11` for MacOSX
+- `i686-w64-mingw32` for Win32 (Ubuntu 16.04 works for this compile)
+- `x86_64-w64-mingw32` for Win64 (Ubuntu 14.04 works for this compile)
+- `x86_64-apple-darwin11` for MacOSX (MacOSX SDKs are needed for this compile)
 - `arm-linux-gnueabihf` for Linux ARM 32 bit
 - `aarch64-linux-gnu` for Linux ARM 64 bit
 
 No other options are needed, the paths are automatically configured.
-
-Install the required dependencies: Ubuntu & Debian
---------------------------------------------------
-
-For macOS cross compilation:
-
-    sudo apt-get install curl librsvg2-bin libtiff-tools bsdmainutils cmake imagemagick libcap-dev libz-dev libbz2-dev python-setuptools
-
-For Win32/Win64 cross compilation:
-
-- see [build-windows.md](../doc/build-windows.md#cross-compilation-for-ubuntu-and-windows-subsystem-for-linux)
-
-For linux (including i386, ARM) cross compilation:
-
-    sudo apt-get install curl g++-aarch64-linux-gnu g++-4.8-aarch64-linux-gnu gcc-4.8-aarch64-linux-gnu binutils-aarch64-linux-gnu g++-arm-linux-gnueabihf g++-4.8-arm-linux-gnueabihf gcc-4.8-arm-linux-gnueabihf binutils-arm-linux-gnueabihf g++-4.8-multilib gcc-4.8-multilib binutils-gold bsdmainutils
-
 
 Dependency Options:
 The following can be set when running make: make FOO=bar
