@@ -64,7 +64,7 @@ inline int64_t GetMstrNodCollateral(int nHeight){
       }
       else if(nHeight >= 800000 && nHeight < 1250000)
       {
-        return 180000;
+        return 18000;
       }
       else if(nHeight >= 1250000 && nHeight < 1500000)
       {

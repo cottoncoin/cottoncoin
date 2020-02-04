@@ -18,10 +18,10 @@ static const int PROTOCOL_VERSION = 70007;
 static const int INIT_PROTO_VERSION = 212;
 
 //! In this version, 'getheaders' was introduced.
-static const int GETHEADERS_VERSION = 70004;
+static const int GETHEADERS_VERSION = 70006;
 
 //! disconnect from peers older than this proto version
-static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = 70005;
+static const int MIN_PEER_PROTO_VERSION_BEFORE_ENFORCEMENT = 70006;
 static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70007;
 
 //! nTime field added to CAddress, starting with this version;
@@ -29,10 +29,10 @@ static const int MIN_PEER_PROTO_VERSION_AFTER_ENFORCEMENT = 70007;
 static const int CADDR_TIME_VERSION = 31402;
 
 //! BIP 0031, pong message, is enabled for all versions AFTER this one
-static const int BIP0031_VERSION = 60000;
+static const int BIP0031_VERSION = 70000;
 
 //! "mempool" command, enhanced "getdata" behavior starts with this version
-static const int MEMPOOL_GD_VERSION = 60002;
+static const int MEMPOOL_GD_VERSION = 70002;
 
 //! "filter*" commands are disabled without NODE_BLOOM after and including this version
 static const int NO_BLOOM_VERSION = 70006;
